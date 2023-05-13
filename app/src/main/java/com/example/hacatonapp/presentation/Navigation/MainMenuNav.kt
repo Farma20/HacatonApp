@@ -10,6 +10,7 @@ import com.example.fefu_fitnes_compose.Screens.Initialization.Navigation.Screen
 import com.example.hacatonapp.presentation.ChatScreen.ChatScreenUI
 import com.example.hacatonapp.presentation.MainScreen.MainScreenUI
 import com.example.hacatonapp.presentation.PatientScreen.PatientScreenUI
+import com.example.hacatonapp.presentation.ViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -17,7 +18,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun MainMenuNav() {
+fun MainMenuNav(viewModel: ViewModel) {
     val navController = rememberAnimatedNavController()
     AnimatedNavHost(navController = navController, startDestination = Screen.MainScreen.route){
         composable(
@@ -88,7 +89,7 @@ fun MainMenuNav() {
                 )
             },
         ){
-            ChatScreenUI(navController)
+            ChatScreenUI(navController, viewModel)
         }
     }
 }

@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import com.example.hacatonapp.presentation.AllPatientsScreen.AllPatientsScreenUI
 import com.example.hacatonapp.presentation.MainScreen.MainScreenUI
 import com.example.hacatonapp.presentation.Navigation.MainMenuNav
+import com.example.hacatonapp.presentation.ViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.navigation
 import com.google.accompanist.navigation.animation.composable
@@ -18,7 +19,7 @@ import com.google.accompanist.navigation.animation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun BottomNavGraph(navController: NavHostController){
+fun BottomNavGraph(navController: NavHostController, viewModel:ViewModel){
     AnimatedNavHost(
         navController = navController,
         startDestination = BottomBarScreen.Main.rout
@@ -26,7 +27,7 @@ fun BottomNavGraph(navController: NavHostController){
         composable(
             route = BottomBarScreen.Main.rout,
         ){
-            MainMenuNav()
+            MainMenuNav(viewModel)
         }
         composable(
             route = BottomBarScreen.AllPatientsScreen.rout,

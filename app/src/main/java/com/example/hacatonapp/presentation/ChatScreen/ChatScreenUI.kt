@@ -23,16 +23,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.navigation.NavController
+import com.example.hacatonapp.presentation.ViewModel
 import com.example.hacatonapp.ui.theme.greenColor
 import java.util.*
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnrememberedMutableState")
 @Composable
-fun ChatScreenUI(navController: NavController) {
+fun ChatScreenUI(navController: NavController, viewModel: ViewModel) {
     val activity = LocalContext.current as Activity
     Surface(color = MaterialTheme.colors.background) {
         Scaffold {
-            ChatScreen()
+            ChatScreen(activity, viewModel)
             SpeechToText(activity)
         }
     }
@@ -85,8 +86,8 @@ fun SpeechToText(activity: Activity) {
 }
 
 @Composable
-fun ChatScreen() {
-    val messages = remember { mutableStateListOf("") }
+fun ChatScreen(context: Context, viewModel: ViewModel) {
+    var messages = remember { viewModel.text }
     val newMessage = remember { mutableStateOf("") }
 
     Column(modifier = Modifier.fillMaxSize()) {

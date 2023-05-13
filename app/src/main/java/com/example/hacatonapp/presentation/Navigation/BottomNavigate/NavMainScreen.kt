@@ -15,20 +15,21 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.hacatonapp.presentation.ViewModel
 import com.example.hacatonapp.ui.theme.MainBlue
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun NavMainScreen() {
+fun NavMainScreen(viewModel: ViewModel) {
     val navController = rememberAnimatedNavController()
     Scaffold(
         bottomBar = { BottomBar(navController = navController)},
     ) {innerPadding ->
         // Apply the padding globally to the whole BottomNavScreensController
         Box(modifier = Modifier.padding(innerPadding)) {
-            BottomNavGraph(navController = navController)
+            BottomNavGraph(navController = navController, viewModel)
         }
     }
 }

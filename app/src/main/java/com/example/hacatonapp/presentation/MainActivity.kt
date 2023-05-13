@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.fefu_fitnes_compose.Screens.BottomNavigate.NavMainScreen
 import com.example.fefu_fitnes_compose.Screens.Initialization.Navigation.Screen
 import com.example.hacatonapp.presentation.ChatScreen.ChatScreenUI
@@ -32,7 +33,7 @@ import java.util.*
 
 class MainActivity : ComponentActivity() {
     var outputTxt by mutableStateOf("Click button for Speech text ")
-
+    val viewModel = ViewModel()
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +54,7 @@ class MainActivity : ComponentActivity() {
                     }
                     SplashScreenUI()
                     if (time == 3)
-                        NavMainScreen()
+                        NavMainScreen(viewModel)
 //                    ChatScreenUI()
 
                 }
@@ -66,6 +67,7 @@ class MainActivity : ComponentActivity() {
         if (requestCode == 101 && resultCode == Activity.RESULT_OK) {
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
             outputTxt = result?.get(0).toString()
+            viewModel.text.add(outputTxt)
         }
     }
 }
